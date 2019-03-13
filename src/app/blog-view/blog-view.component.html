@@ -1,0 +1,58 @@
+
+ 
+<div class="row">
+  <h2 *ngIf="currentBlog">
+      {{currentBlog.title|uppercase}}  : DETAILS 
+  </h2>
+     
+<table class="table table-striped"  *ngIf="currentBlog">
+  <tr>
+      <td>Title</td>
+    <td>{{currentBlog.title|uppercase}}</td>
+  </tr>
+  <tr>
+    <td>Posted By</td>
+    <td>{{currentBlog.author}}</td>
+  </tr>
+  <tr>
+      <td>Posted On</td>
+      <td>{{currentBlog.create|date}}</td>
+    </tr>
+    <tr>
+        <td>Tags</td>
+        <td *ngIf="currentBlog.tags.length!=undefined && currentBlog.tags.length>0">
+          <span *ngFor="let tag of currentBlog.tags; let first=first; let last=last">{{tag}}{{last ?'':','}}</span></td>
+      </tr>
+      <tr>
+          <td>category</td>
+          <td>{{currentBlog.category|uppercase}}</td>
+        </tr>
+        <tr>
+            <td>Published</td>
+            <td>{{currentBlog.ispublished}}</td>
+          </tr>
+          <tr>
+              <td>views</td>
+              <td>{{currentBlog.views}}</td>
+            </tr>
+            <tr>
+                <td>bodyHtml</td>
+                <td><div [innerHtml]="currentBlog.bodyHtml"></div></td>
+              </tr>
+              <tr>
+                  <td>description</td>
+                  <td>{{currentBlog.description}}</td>
+                </tr>
+</table>
+</div>
+<div class="row" *ngIf="currentBlog">
+<div class="col-md-4">
+  <a class="btn btn-primary" [routerLink]="['/edit',currentBlog.blogId]">Edit</a>
+</div>
+<div class="col-md-4">
+    <a class="btn btn-danger">Delete</a>
+  </div>
+  <div class="col-md-4">
+      <a class="btn btn-warning">Go Back</a>
+    </div>
+</div>
